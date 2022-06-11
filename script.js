@@ -91,21 +91,19 @@ function deleteTask() {
   taskInputField.focus();
 }
 
-// #########################################
-//   KEYBOARD SHORTCUTS TO COMPLETE TASK
-// #########################################
+// ##########################
+//   KEYBOARD SHORTCUTS
+// ##########################
 document.addEventListener('keydown', function (keyEvent) {
   const pressed = Number.parseInt(keyEvent.key);
 
-  //To delete task: Alt + number
-  if (keyEvent.altKey && !isNaN(pressed)) {
-    deleteTask.call([...trashIconEls].at(pressed - 1));
-  }
+  if (isNaN(pressed)) return;
 
+  //To delete task: Alt + number
+  if (keyEvent.altKey) deleteTask.call([...trashIconEls].at(pressed - 1));
   //To mark task as complete: number;
-  if (!isNaN(pressed) && document.activeElement !== taskInputField) {
+  else if (document.activeElement !== taskInputField)
     markTaskComplete.call([...checkIconEls].at(pressed - 1));
-  }
 });
 
 // ######################
@@ -124,7 +122,7 @@ function addListener() {
 // ######################
 //   INIT
 // ######################
-taskInputField.focus();
 setDate();
 const checkIconEls = document.getElementsByClassName('circle');
 const trashIconEls = document.getElementsByClassName('trash');
+taskInputField.focus();

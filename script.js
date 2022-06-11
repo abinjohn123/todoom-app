@@ -6,7 +6,7 @@ const taskInputField = document.querySelector('.task-input');
 const dateField = document.querySelector('.date');
 
 // ######################
-//   SETTING THE DATE
+//   SET THE DATE
 // ######################
 function setDate() {
   const now = new Date();
@@ -22,7 +22,7 @@ function setDate() {
 }
 
 // ######################
-//   ADDING A NEW TASK
+//  NEW TASK
 // ######################
 function returnHTML(task) {
   return `<li class="task-entry">
@@ -40,7 +40,7 @@ function returnHTML(task) {
       </li>`;
 }
 
-taskInputForm.addEventListener('submit', function (e) {
+function taskInput(e) {
   e.preventDefault();
 
   const task = taskInputField.value.trim();
@@ -63,22 +63,17 @@ taskInputForm.addEventListener('submit', function (e) {
     return;
   }
   taskInputField.focus();
-});
+}
 
+// ###########################
+//  MARK A TASK AS COMPLETE
+// ###########################
 function markTaskComplete() {
   this?.parentElement.classList.toggle('complete');
 }
 
-function addListener() {
-  const recentCircle = [...checkIconEls].at(-1);
-  recentCircle.addEventListener('click', markTaskComplete);
-
-  const recentTrash = [...trashIconEls].at(-1);
-  recentTrash.addEventListener('click', deleteTask);
-}
-
 // ######################
-//   DELETING A TASK
+//   DELETE A TASK
 // ######################
 function deleteTask() {
   const taskEntry = this?.parentElement;
@@ -112,6 +107,19 @@ document.addEventListener('keydown', function (keyEvent) {
     markTaskComplete.call([...checkIconEls].at(pressed - 1));
   }
 });
+
+// ######################
+//  EVENT LISTENERS
+// ######################
+taskInputForm.addEventListener('submit', taskInput);
+
+function addListener() {
+  const recentCircle = [...checkIconEls].at(-1);
+  recentCircle.addEventListener('click', markTaskComplete);
+
+  const recentTrash = [...trashIconEls].at(-1);
+  recentTrash.addEventListener('click', deleteTask);
+}
 
 // ######################
 //   INIT

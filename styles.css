@@ -44,7 +44,6 @@ html {
 .tasks-container {
   font-size: 1.4rem;
   list-style-type: none;
-  /*   background-color: skyblue; */
   margin-bottom: 2.4rem;
 }
 
@@ -61,7 +60,6 @@ html {
 .task-entry {
   padding: 0.4rem;
   margin-bottom: 1rem;
-  /*   background-color: pink; */
 
   display: flex;
   gap: 1.4rem;

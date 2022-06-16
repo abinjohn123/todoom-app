@@ -4,6 +4,7 @@ const taskContainer = document.querySelector('.tasks-container');
 const taskInputForm = document.querySelector('.new-task-section');
 const taskInputField = document.querySelector('.task-input');
 const dateField = document.querySelector('.date');
+const activeTasks = document.getElementsByClassName('task-entry');
 
 // ######################
 //   SET THE DATE
@@ -26,13 +27,13 @@ function setDate() {
 // ######################
 function returnHTML(task) {
   return `<li class="task-entry">
-        <button class="circle" type="button">
+        <button class="circle" type="button" data-button-type="taskComplete">
           <svg xmlns="http://www.w3.org/2000/svg" class="circle-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" data-button-type="taskComplete">
             <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" data-button-type="taskComplete"/>
           </svg>
         </button>
         <p class="task">${task}</p>
-        <button class="trash">
+        <button class="trash" data-button-type="taskDelete">
           <svg xmlns="http://www.w3.org/2000/svg" class="trash-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" data-button-type="taskDelete">
   <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" data-button-type="taskDelete"/>
 </svg>
@@ -51,7 +52,7 @@ function taskInput(e) {
   const html = returnHTML(task);
   taskContainer.insertAdjacentHTML('beforeend', html);
 
-  if (checkIconEls.length >= 5) {
+  if (activeTasks.length >= 5) {
     placeholderSwitch('warning');
     taskInputField.classList.add('message');
     taskInputField.readOnly = true;
@@ -65,14 +66,14 @@ function taskInput(e) {
 //   MARK A TASK AS COMPLETE
 // ###########################
 function markTaskComplete() {
-  this?.parentElement.classList.toggle('complete');
+  this?.classList.toggle('complete');
 }
 
 // ######################
 //   DELETE A TASK
 // ######################
 function deleteTask() {
-  const taskEntry = this?.parentElement;
+  const taskEntry = this;
 
   if (!taskEntry) return;
 
@@ -96,10 +97,10 @@ document.addEventListener('keydown', function (keyEvent) {
   if (isNaN(pressed)) return;
 
   //To delete task: Alt + number
-  if (keyEvent.altKey) deleteTask.call([...trashIconEls].at(pressed - 1));
+  if (keyEvent.altKey) deleteTask.call([...activeTasks].at(pressed - 1));
   //To mark task as complete: number;
   else if (document.activeElement !== taskInputField)
-    markTaskComplete.call([...checkIconEls].at(pressed - 1));
+    markTaskComplete.call([...activeTasks].at(pressed - 1));
 });
 
 // ######################
@@ -112,7 +113,7 @@ function attachListener(e) {
 
   if (!buttonType) return;
 
-  while (!target.parentElement.classList.contains('task-entry'))
+  while (!target.classList.contains('task-entry'))
     target = target.parentElement;
 
   switch (buttonType) {
@@ -147,7 +148,5 @@ taskContainer.addEventListener('click', attachListener);
 //   INIT
 // ######################
 setDate();
-const checkIconEls = document.getElementsByClassName('circle');
-const trashIconEls = document.getElementsByClassName('trash');
 placeholderSwitch('normal');
 taskInputField.focus();

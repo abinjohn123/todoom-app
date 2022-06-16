@@ -52,10 +52,7 @@ function taskInput(e) {
   taskContainer.insertAdjacentHTML('beforeend', html);
 
   if (checkIconEls.length >= 5) {
-    taskInputField.setAttribute(
-      'placeholder',
-      'only 5 tasks can be added at a time.'
-    );
+    placeholderSwitch('warning');
     taskInputField.classList.add('message');
     taskInputField.readOnly = true;
     taskInputField.blur();
@@ -84,7 +81,7 @@ function deleteTask() {
     taskEntry.remove();
   }, 200);
 
-  taskInputField.setAttribute('placeholder', 'tick tock goes the clock');
+  placeholderSwitch('normal');
   taskInputField.classList.remove('message');
   taskInputField.readOnly = false;
   taskInputField.focus();
@@ -129,6 +126,18 @@ function attachListener(e) {
 }
 
 // ######################
+//   INPUT PLACEHOLDER
+// ######################
+function placeholderSwitch(state) {
+  let placeholder = '';
+  if (state === 'normal') placeholder = 'tick tock goes the clock';
+  else if (state === 'warning')
+    placeholder = 'only 5 tasks can be added at a time.';
+
+  taskInputField.setAttribute('placeholder', placeholder);
+}
+
+// ######################
 //   EVENT LISTENERS
 // ######################
 taskInputForm.addEventListener('submit', taskInput);
@@ -140,4 +149,5 @@ taskContainer.addEventListener('click', attachListener);
 setDate();
 const checkIconEls = document.getElementsByClassName('circle');
 const trashIconEls = document.getElementsByClassName('trash');
+placeholderSwitch('normal');
 taskInputField.focus();

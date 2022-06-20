@@ -2,6 +2,7 @@
 
 A minimal ToDo application that permits only 5 tasks at a time.
 Never get overwhelmed with ToDo lists again.
+[Check out the app](https://abinjohn123.github.io/todoom-app/)
 
 ## Yet Another ToDo App
 
@@ -16,6 +17,8 @@ It grew on me as I was building it and I saw the potential it had to practice ot
 3. To delete a task either click on the respective trash icons to the right, or use Alt + number keys (1-5) to delete the respective tasks.
 
 ## 🔗 Links
+
+[Live app](https://abinjohn123.github.io/todoom-app/)
 
 [CodePen](https://codepen.io/abinjohn/pen/KKQRJPy)
 

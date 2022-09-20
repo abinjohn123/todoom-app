@@ -1,5 +1,6 @@
 :root {
   --bg: #fff1f2;
+  --bg-dark: #111827;
   --primary: #9f1239;
   --text: #290610;
   --primary-lighter-1: #e7d0d7;
@@ -17,6 +18,10 @@ html {
   font-size: 10px;
   font-family: sans-serif;
   color: var(--text);
+}
+
+body {
+  background-color: var(--bg-dark);
 }
 
 .container {

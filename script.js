@@ -104,9 +104,9 @@ document.addEventListener('keydown', function (keyEvent) {
 });
 
 // ######################
-//   ADD TASK HANDLERS
+//   TASK CLICK HANDLER
 // ######################
-function attachListener(e) {
+function taskClickHandler(e) {
   e.preventDefault();
   let target = e.target.closest('[data-button-type]');
 
@@ -140,7 +140,7 @@ function placeholderSwitch(state) {
 //   EVENT LISTENERS
 // ######################
 taskInputForm.addEventListener('submit', taskInput);
-taskContainer.addEventListener('click', attachListener);
+taskContainer.addEventListener('click', taskClickHandler);
 
 // ######################
 //   INIT
